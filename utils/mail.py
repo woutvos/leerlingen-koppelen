@@ -1,13 +1,15 @@
 import os
-from dotenv import load_dotenv
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
+from dotenv import load_dotenv
+
 from utils.data import leerlingen
 
 
-
 class mail_leerling:
+
     def voorkeur(leerlingnummer, code):
         load_dotenv()
 
@@ -74,11 +76,11 @@ class mail_leerling:
 </html>
         """
 
-        email_message =  MIMEMultipart()
-        email_message['From'] = os.getenv("EMAIL")
+        email_message = MIMEMultipart()
+        email_message["From"] = os.getenv("EMAIL")
         # email_message['To'] = "mail@woutvos.nl" # tijdelijk om te zorgen dat mails niet echt naar leerilngen gaan
-        email_message['Subject'] = "Geef je voorkeur op!"
-        email_message['To'] = f"{leerlingnummer}@corderius.nl"
+        email_message["Subject"] = "Geef je voorkeur op!"
+        email_message["To"] = f"{leerlingnummer}@corderius.nl"
 
         email_message.attach(MIMEText(html, "html"))
         email_string = email_message.as_string()
@@ -86,11 +88,13 @@ class mail_leerling:
         server = smtplib.SMTP(f"{host}: {port}")
         server.starttls()
         server.login(os.getenv("EMAIL"), os.getenv("EMAIL_WACHTWOORD"))
-        server.sendmail(email_message['From'], email_message['To'], email_string)
+        server.sendmail(email_message["From"], email_message["To"],
+                        email_string)
         server.quit()
 
-        print(f"Mail verzonden naar {leerlingnummer}@corderius.nl met code: {code}")
-
+        print(
+            f"Mail verzonden naar {leerlingnummer}@corderius.nl met code: {code}"
+        )
 
     def uitslag(leerlingnummer, mentor, klas):
         load_dotenv()
@@ -148,11 +152,11 @@ class mail_leerling:
 </html>
         """
 
-        email_message =  MIMEMultipart()
-        email_message['From'] = os.getenv("EMAIL")
+        email_message = MIMEMultipart()
+        email_message["From"] = os.getenv("EMAIL")
         # email_message['To'] = "mail@woutvos.nl" # tijdelijk om te zorgen dat mails niet echt naar leerilngen gaan
-        email_message['Subject'] = "Je mentor is bekend!"
-        email_message['To'] = f"{leerlingnummer}@corderius.nl"
+        email_message["Subject"] = "Je mentor is bekend!"
+        email_message["To"] = f"{leerlingnummer}@corderius.nl"
 
         email_message.attach(MIMEText(html, "html"))
         email_string = email_message.as_string()
@@ -160,7 +164,8 @@ class mail_leerling:
         server = smtplib.SMTP(f"{host}: {port}")
         server.starttls()
         server.login(os.getenv("EMAIL"), os.getenv("EMAIL_WACHTWOORD"))
-        server.sendmail(email_message['From'], email_message['To'], email_string)
+        server.sendmail(email_message["From"], email_message["To"],
+                        email_string)
         server.quit()
 
         print(f"Uitslag verzonden naar {leerlingnummer}@corderius.nl")
@@ -222,11 +227,11 @@ class mail_leerling:
 </html>
 """
 
-        email_message =  MIMEMultipart()
-        email_message['From'] = os.getenv("EMAIL")
+        email_message = MIMEMultipart()
+        email_message["From"] = os.getenv("EMAIL")
         # email_message['To'] = "mail@woutvos.nl" # tijdelijk om te zorgen dat mails niet echt naar leerilngen gaan
-        email_message['Subject'] = "Reminder: vul je voorkeur in"
-        email_message['To'] = f"{leerlingnummer}@corderius.nl"
+        email_message["Subject"] = "Reminder: vul je voorkeur in"
+        email_message["To"] = f"{leerlingnummer}@corderius.nl"
 
         email_message.attach(MIMEText(html, "html"))
         email_string = email_message.as_string()
@@ -234,7 +239,8 @@ class mail_leerling:
         server = smtplib.SMTP(f"{host}: {port}")
         server.starttls()
         server.login(os.getenv("EMAIL"), os.getenv("EMAIL_WACHTWOORD"))
-        server.sendmail(email_message['From'], email_message['To'], email_string)
+        server.sendmail(email_message["From"], email_message["To"],
+                        email_string)
         server.quit()
 
         print(f"Reminder send to {leerlingnummer}@corderius.nl")
