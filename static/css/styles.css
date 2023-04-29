@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+p {
+    text-align: start;
+}
+
+header {
+    padding-top: 80px;
+    padding-bottom: 20px;
+    text-align: center;
+    background: #1e91d6;
+    color: white;
+    font-size: 30px;
+}
+
+main {
+    max-width: 800px;
+    padding-bottom: 100px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    padding: 20px;
+}
+
+.no-max-width {
+    max-width: none;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-size: 1em;
+    padding: 14px 20px;
+    width: auto;
+    background-color: #5cdb5c;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #42af42;
+  }
+
+footer {
+    padding: 1px;
+    text-align: center;
+    background: #ddd;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+
+.login {
+    border: 4px solid #494947;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 7px;
+    font-size: 1em;
+}
+
+/* Fase page */
+.fase-button {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-size: 1em;
+    padding: 14px 20px;
+    width: auto;
+    background-color: #1e91d6;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+.fase-button:hover {
+    background-color: #0686d6;
+  }
+
+.fase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.fase-grid-item {
+    background-color: #494947;
+    border: 4px solid #494947;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 7px;
+    font-size: 1em;
+    color: white;
+}
+
+ul {
+    text-align: left;
+}
+
+.input {
+    border: 4px solid #494947;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 7px;
+    font-size: 1em;
+}
+
+/* Preferences page */
+
+.drag-area {
+    padding: 15px;
+    margin: 0 auto;
+    font-size: 1em;
+    max-width: 1200px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 10px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.grid-item {
+    border-radius: 6px;
+    font-size: 1em;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    background-color: #1e91d6;
+}
+
+.grid-item:hover {
+    background-color: #52a4d6;
+}
+
+@media (min-width: 500px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 750px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+}
+  
+@media (min-width: 1000px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 1200px) {
+    .grid { grid-template-columns: repeat(5, 1fr); }
+}

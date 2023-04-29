@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voorkeur opgeven</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Voorkeur opgeven</h1>
+        <p style="text-align: center;">Door het rangschikken van de personen kun je je voorkeur aangeven.</p>
+    </header>
+    <main class="no-max-width">
+        {% if request.MOBILE %}
+            <p>Helaas ondersteunen we op dit moment telefoons nog niet, probeer het via je laptop.</p>
+        {% else %}
+        {% endif %}
+        
+        <h1> Mentor!!!</h1>
+        <div class="drag-area">
+            <div class="grid">
+                {% for persoon in personen_lijst %}
+                <div id="{{persoon[0]}}" class="grid-item" draggable="true"><p>{{persoon[1]}}</p></div>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <button onclick="saveData()">Opslaan</button>
+    </main>
+</body>
+</html>
