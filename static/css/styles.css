@@ -43,11 +43,12 @@ button {
     text-decoration: none;
     border: none;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 button:hover {
     background-color: #42af42;
-  }
+}
 
 footer {
     padding: 1px;
@@ -149,6 +150,42 @@ ul {
     background-color: #52a4d6;
 }
 
+/* Huidige fase page */
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+  
+.slider:hover {
+    opacity: 1;
+}
+  
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #494947;
+    cursor: pointer;
+}
+  
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #494947;
+    cursor: pointer;
+}
+
+/* Media rules*/
 @media (min-width: 500px) {
     .grid { grid-template-columns: repeat(2, 1fr); }
 }
