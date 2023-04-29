@@ -1,15 +1,18 @@
-from utils.data import leerlingen
-from utils.mail import mail_leerling
 import logging
 import sqlite3
+
+from utils.data import leerlingen
+from utils.mail import mail_leerling
+
 
 def remind():
     for student in leerlingen.get_list_reminder():
         mail_leerling.reminder(student)
         logging.info(f"Herinnering gestuurd naar {student}")
 
+
 def create_database():
-    conn = sqlite3.connect('test.db')
+    conn = sqlite3.connect("test.db")
     c = conn.cursor()
     c.execute(f"""
     CREATE TABLE "leerlingen" (
@@ -46,5 +49,5 @@ def create_database():
         "name"	TEXT NOT NULL,
         "password"	TEXT)
     """)
-    
+
     conn.close()

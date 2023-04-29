@@ -1,11 +1,14 @@
 import hashlib
+import logging
 import random
 import sqlite3
 import string
-import logging
+
 from utils.mail import mail_leerling
 
+
 class code:
+
     def gen_all():
         from utils.mail import mail_leerling
 
@@ -15,7 +18,8 @@ class code:
         c.execute("SELECT * FROM leerlingen")
         rows = c.fetchall()
 
-        logging.info("Gestart met het genereren van codes voor alle leerlingen")
+        logging.info(
+            "Gestart met het genereren van codes voor alle leerlingen")
 
         for row in rows:
             leerlingnummer = row[0]
@@ -33,7 +37,8 @@ class code:
 
         conn.close()
 
-        logging.info("Alle codes zijn gegenereerd en verstuurd naar de leerlingen")
+        logging.info(
+            "Alle codes zijn gegenereerd en verstuurd naar de leerlingen")
 
     def gen_single(leerlingnummer):
         conn = sqlite3.connect("database.db")
@@ -52,7 +57,9 @@ class code:
 
         conn.close()
 
-        logging.info(f"Code is hergegenereerd en verstuurd naar leerling {leerlingnummer}")
+        logging.info(
+            f"Code is hergegenereerd en verstuurd naar leerling {leerlingnummer}"
+        )
 
     def check_leerling(leerling, code):
         conn = sqlite3.connect("database.db")
@@ -60,7 +67,9 @@ class code:
 
         code = hashlib.sha256(code.encode("utf-8")).hexdigest()
 
-        c.execute(f'SELECT * FROM leerlingen WHERE leerlingnummer = {leerling} AND code = "{code}"')
+        c.execute(
+            f'SELECT * FROM leerlingen WHERE leerlingnummer = {leerling} AND code = "{code}"'
+        )
         rows = c.fetchall()
 
         if len(rows) == 0:
@@ -73,7 +82,8 @@ class code:
 
         code = hashlib.sha256(code.encode("utf-8")).hexdigest()
 
-        c.execute(f'SELECT * FROM mentoren WHERE id = {mentor} AND code = "{code}"')
+        c.execute(
+            f'SELECT * FROM mentoren WHERE id = {mentor} AND code = "{code}"')
         rows = c.fetchall()
 
         if len(rows) == 0:
