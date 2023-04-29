@@ -4,9 +4,14 @@
     <h1>Dashboard</h1>
 </header>
 <main>
-    <p>Dit programma is opgedeeld in verschillende fases om het begrijpelijk te maken! Hieronder vind je een knop met pagina en korte beschrijving naar elke fase.</p>
     <!-- Grid met daarin kaarten voor elke fase en 2 korte punten wat het doet -->
     <div class="fase-grid">
+        <div class="fase-grid-item">
+            <h3>Verander fase</h3>
+            <p>De huidige fase is: {{ huidige_fase }}</p>
+            <a href="{{ url_for('verander_fase') }}"><button class="fase-button">Lees meer</button></a>
+        </div>
+
         <div class="fase-grid-item">
             <h3>Fase 1</h3>
             <ul>
