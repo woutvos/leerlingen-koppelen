@@ -121,7 +121,39 @@ def dashboard():
         return redirect(url_for("admin_login"))
 
     if "admin_username" in session:
-        return render_template("dashboard.html", title="Dashboard")
+        return render_template("dashboard.html", title="Dashboard", huidige_fase=huidige_fase)
+
+@app.route("/verander-fase/", methods=["GET", "POST"])
+def verander_fase():
+    global huidige_fase
+    if "admin_username" not in session:
+        return redirect(url_for("admin_login"))
+
+    if "admin_username" in session:
+        if request.method=="POST":
+            fase = request.form.get("fase")
+            if fase == "1":
+                huidige_fase = 1
+                logging.info("Fase 1 is gestart")
+
+            if fase == "2":
+                huidige_fase = 2
+                logging.info("Fase 2 is gestart")
+
+            if fase == "3":
+                huidige_fase = 3
+                logging.info("Fase 3 is gestart")
+
+            if fase == "4":
+                huidige_fase = 4
+                logging.info("Fase 4 is gestart")
+
+            if fase == "5":
+                huidige_fase = 5
+                logging.info("Fase 5 is gestart")
+
+        return render_template("verander-fase.html", huidige_fase=huidige_fase)
+
 
 @app.route("/fase1/", methods=["GET", "POST"])
 def fase1():
