@@ -59,7 +59,9 @@ def login_post():
 @app.route("/login/", methods=["GET"])
 def login():
     if "gebruikersnaam" not in session:
-        return render_template("login.html", title="Login", huidige_fase=huidige_fase)
+        return render_template("login.html",
+                               title="Login",
+                               huidige_fase=huidige_fase)
 
     if "gebruikersnaam" in session:
         return redirect(url_for("voorkeur"))
@@ -151,26 +153,26 @@ def dashboard():
 def verander_fase_post():
     global huidige_fase
     if "admin_username" in session:
-            fase = request.form.get("fase")
-            if fase == "1":
-                huidige_fase = 1
-                logging.info("Fase 1 is gestart")
+        fase = request.form.get("fase")
+        if fase == "1":
+            huidige_fase = 1
+            logging.info("Fase 1 is gestart")
 
-            if fase == "2":
-                huidige_fase = 2
-                logging.info("Fase 2 is gestart")
+        if fase == "2":
+            huidige_fase = 2
+            logging.info("Fase 2 is gestart")
 
-            if fase == "3":
-                huidige_fase = 3
-                logging.info("Fase 3 is gestart")
+        if fase == "3":
+            huidige_fase = 3
+            logging.info("Fase 3 is gestart")
 
-            if fase == "4":
-                huidige_fase = 4
-                logging.info("Fase 4 is gestart")
+        if fase == "4":
+            huidige_fase = 4
+            logging.info("Fase 4 is gestart")
 
-            if fase == "5":
-                huidige_fase = 5
-                logging.info("Fase 5 is gestart")
+        if fase == "5":
+            huidige_fase = 5
+            logging.info("Fase 5 is gestart")
 
 
 @app.route("/verander-fase/", methods=["GET"])
@@ -188,7 +190,8 @@ def fase1_post():
     if request.form.get("confirm") == "JA2023" and "admin_username" in session:
         code.gen_all()
 
-    if request.form.get("leerlingnummer") is not None and "admin_username" in session:
+    if request.form.get(
+            "leerlingnummer") is not None and "admin_username" in session:
         code.gen_single(request.form.get("leerlingnummer"))
 
 
