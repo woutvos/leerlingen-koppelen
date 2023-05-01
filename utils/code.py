@@ -17,8 +17,7 @@ class code:
         rows = c.fetchall()
 
         logging.info(
-            "Gestart met het genereren van codes voor alle leerlingen"
-        )
+            "Gestart met het genereren van codes voor alle leerlingen")
 
         for row in rows:
             leerlingnummer = row[0]
@@ -82,8 +81,7 @@ class code:
         code = hashlib.sha256(code.encode("utf-8")).hexdigest()
 
         c.execute(
-            f'SELECT * FROM mentoren WHERE id = {mentor} AND code = "{code}"'
-        )
+            f'SELECT * FROM mentoren WHERE id = {mentor} AND code = "{code}"')
         rows = c.fetchall()
 
         if len(rows) == 0:
