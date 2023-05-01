@@ -14,7 +14,7 @@ def remind():
 def create_database():
     conn = sqlite3.connect("test.db")
     c = conn.cursor()
-    c.execute(f"""
+    c.execute("""
     CREATE TABLE "leerlingen" (
         "leerlingnummer"	NUMERIC,
         "naam"	INTEGER,
@@ -28,7 +28,7 @@ def create_database():
     )
     """)
 
-    c.execute(f"""
+    c.execute("""
     CREATE TABLE "mentoren" (
         "id"	NUMERIC,
         "naam"	TEXT,
@@ -43,7 +43,7 @@ def create_database():
     )
     """)
 
-    c.execute(f"""
+    c.execute("""
     CREATE TABLE "admin" (
         "username"	NUMERIC,
         "name"	TEXT NOT NULL,
