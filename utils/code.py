@@ -8,6 +8,7 @@ from utils.mail import mail_leerling
 
 
 class code:
+    """ This class contains all things that have to do with the codes from checking to generating. """
 
     def gen_all():
         conn = sqlite3.connect("database.db")

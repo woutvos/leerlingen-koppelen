@@ -3,6 +3,7 @@ import sqlite3
 
 
 class admin:
+    """ This class is related to all things that have to do with the admin. """
 
     def check(username, password):
         conn = sqlite3.connect("database.db")

@@ -9,6 +9,7 @@ from utils.data import leerlingen
 
 
 class mail_leerling:
+    """ This class contains all the functions for sending emails to students. """
 
     def voorkeur(leerlingnummer, code):
         load_dotenv()
