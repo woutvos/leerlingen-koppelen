@@ -183,7 +183,8 @@ def fase1():
         if "admin_username" in session:
             code.gen_all()
 
-    if request.method == "POST" and request.form.get("leerlingnummer") is not None:
+    if request.method == "POST" and request.form.get(
+            "leerlingnummer") is not None:
         if "admin_username" in session:
             code.gen_single(request.form.get("leerlingnummer"))
 
