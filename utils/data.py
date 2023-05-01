@@ -108,9 +108,7 @@ class mentoren:
                      voorkeur_5):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        c.execute(
-            f'UPDATE mentoren SET voorkeur_1 = "{voorkeur_1}", voorkeur_2 = "{voorkeur_2}", voorkeur_3 = "{voorkeur_3}", voorkeur_4 = "{voorkeur_4}", voorkeur_5 = "{voorkeur_5}" WHERE id = {mentor}'
-        )
+        c.execute('UPDATE mentoren SET voorkeur_1 = ?, voorkeur_2 = ?, voorkeur_3 = ?, voorkeur_4 = ?, voorkeur_5 = ? WHERE id = ?', (voorkeur_1, voorkeur_2, voorkeur_3, voorkeur_4, voorkeur_5, mentor))
         conn.commit()
         conn.close()
         logging.info(f"Voorkeuren van mentor {mentor} zijn aangepast")
