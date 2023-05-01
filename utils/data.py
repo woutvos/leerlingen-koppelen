@@ -78,8 +78,6 @@ class leerlingen:
 class mentoren:
 
     def get_voorkeuren():
-        import sqlite3
-
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
         leerling_voorkeuren = {}

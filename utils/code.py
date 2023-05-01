@@ -10,8 +10,6 @@ from utils.mail import mail_leerling
 class code:
 
     def gen_all():
-        from utils.mail import mail_leerling
-
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
