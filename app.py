@@ -37,7 +37,7 @@ def error():
 
 
 @app.route("/login/", methods=["POST"])
-def login():
+def login_post():
     gebruikersnaam = request.form.get("gebruikersnaam")
     password_code = request.form.get("code")
 
@@ -119,7 +119,7 @@ def bedankt():
 
 
 @app.route("/admin-login/", methods=["POST"])
-def admin_login():
+def admin_login_post():
     admin_username = request.form.get("username")
     password = request.form.get("password")
 
@@ -148,7 +148,7 @@ def dashboard():
 
 
 @app.route("/verander-fase/", methods=["POST"])
-def verander_fase():
+def verander_fase_post():
     global huidige_fase
     if "admin_username" in session:
             fase = request.form.get("fase")
@@ -184,7 +184,7 @@ def verander_fase():
 
 
 @app.route("/fase1/", methods=["POST"])
-def fase1():
+def fase1_post():
     if request.form.get("confirm") == "JA2023" and "admin_username" in session:
         code.gen_all()
 
@@ -202,7 +202,7 @@ def fase1():
 
 
 @app.route("/fase2/", methods=["POST"])
-def fase2():
+def fase2_post():
     if "admin_username" in session:
         remind()
 
