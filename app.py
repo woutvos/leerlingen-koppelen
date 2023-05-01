@@ -26,46 +26,46 @@ logging.basicConfig(
 
 
 # Routes
-@app.route("/")
+@app.route("/", methods=["GET"])
 def home():
     return render_template("home.html", title="Home")
 
 
-@app.route("/error/")
+@app.route("/error/", methods=["GET"])
 def error():
     return render_template("error.html", title="Error")
 
 
-@app.route("/login/", methods=["GET", "POST"])
+@app.route("/login/", methods=["POST"])
 def login():
-    if request.method == "POST":
-        gebruikersnaam = request.form.get("gebruikersnaam")
-        password_code = request.form.get("code")
+    gebruikersnaam = request.form.get("gebruikersnaam")
+    password_code = request.form.get("code")
 
-        if huidige_fase == 2:
-            if code.check_leerling(gebruikersnaam, password_code) is True:
-                session["gebruikersnaam"] = gebruikersnaam
-                logging.info(f"Leerling {gebruikersnaam} heeft ingelogd")
-                return redirect(url_for("voorkeur"))
-            logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
+    if huidige_fase == 2:
+        if code.check_leerling(gebruikersnaam, password_code) is True:
+            session["gebruikersnaam"] = gebruikersnaam
+            logging.info(f"Leerling {gebruikersnaam} heeft ingelogd")
+            return redirect(url_for("voorkeur"))
+        logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
 
-        elif huidige_fase == 3:
-            if code.check_mentor(gebruikersnaam, password_code) is True:
-                session["gebruikersnaam"] = gebruikersnaam
-                logging.info(f"Mentor {gebruikersnaam} heeft ingelogd")
-                return redirect(url_for("voorkeur"))
-            logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
+    elif huidige_fase == 3:
+        if code.check_mentor(gebruikersnaam, password_code) is True:
+            session["gebruikersnaam"] = gebruikersnaam
+            logging.info(f"Mentor {gebruikersnaam} heeft ingelogd")
+            return redirect(url_for("voorkeur"))
+        logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
 
+
+@app.route("/login/", methods=["GET"])
+def login():
     if "gebruikersnaam" not in session:
-        return render_template("login.html",
-                               title="Login",
-                               huidige_fase=huidige_fase)
+        return render_template("login.html", title="Login", huidige_fase=huidige_fase)
 
     if "gebruikersnaam" in session:
         return redirect(url_for("voorkeur"))
 
 
-@app.route("/voorkeur/", methods=["GET", "POST"])
+@app.route("/voorkeur/", methods=["GET"])
 def voorkeur():
     if "gebruikersnaam" not in session:
         return redirect(url_for("login"))
@@ -118,19 +118,21 @@ def bedankt():
     return render_template("bedankt.html", title="Bedankt!")
 
 
-@app.route("/admin-login/", methods=["GET", "POST"])
+@app.route("/admin-login/", methods=["POST"])
 def admin_login():
-    if request.method == "POST":
-        admin_username = request.form.get("username")
-        password = request.form.get("password")
+    admin_username = request.form.get("username")
+    password = request.form.get("password")
 
-        if admin.check(admin_username, password) is True:
-            session["admin_username"] = admin_username
-            logging.info(f"Admin {admin_username} heeft ingelogd")
-            return redirect(url_for("dashboard"))
-        logging.info(
-            f"Wachtwoord verkeerd ingevoerd voor gebruiker {admin_username}")
+    if admin.check(admin_username, password) is True:
+        session["admin_username"] = admin_username
+        logging.info(f"Admin {admin_username} heeft ingelogd")
+        return redirect(url_for("dashboard"))
+    logging.info(
+        f"Wachtwoord verkeerd ingevoerd voor gebruiker {admin_username}")
 
+
+@app.route("/admin-login/", methods=["GET"])
+def admin_login():
     return render_template("admin-login.html", title="Admin login")
 
 
@@ -145,14 +147,10 @@ def dashboard():
                                huidige_fase=huidige_fase)
 
 
-@app.route("/verander-fase/", methods=["GET", "POST"])
+@app.route("/verander-fase/", methods=["POST"])
 def verander_fase():
     global huidige_fase
-    if "admin_username" not in session:
-        return redirect(url_for("admin_login"))
-
     if "admin_username" in session:
-        if request.method == "POST":
             fase = request.form.get("fase")
             if fase == "1":
                 huidige_fase = 1
@@ -174,17 +172,28 @@ def verander_fase():
                 huidige_fase = 5
                 logging.info("Fase 5 is gestart")
 
+
+@app.route("/verander-fase/", methods=["GET"])
+def verander_fase():
+    global huidige_fase
+    if "admin_username" not in session:
+        return redirect(url_for("admin_login"))
+
+    if "admin_username" in session:
         return render_template("verander-fase.html", huidige_fase=huidige_fase)
 
 
-@app.route("/fase1/", methods=["GET", "POST"])
+@app.route("/fase1/", methods=["POST"])
 def fase1():
-    if request.method == "POST" and request.form.get("confirm") == "JA2023" and "admin_username" in session:
+    if request.form.get("confirm") == "JA2023" and "admin_username" in session:
         code.gen_all()
 
-    if request.method == "POST" and request.form.get("leerlingnummer") is not None and "admin_username" in session:
+    if request.form.get("leerlingnummer") is not None and "admin_username" in session:
         code.gen_single(request.form.get("leerlingnummer"))
 
+
+@app.route("/fase1/", methods=["GET"])
+def fase1():
     if "admin_username" not in session:
         return redirect(url_for("admin_login"))
 
@@ -192,11 +201,14 @@ def fase1():
         return render_template("fase1.html", title="Fase 1")
 
 
-@app.route("/fase2/", methods=["GET", "POST"])
+@app.route("/fase2/", methods=["POST"])
 def fase2():
-    if request.method == "POST" and "admin_username" in session:
+    if "admin_username" in session:
         remind()
 
+
+@app.route("/fase2/", methods=["GET"])
+def fase2():
     if "admin_username" not in session:
         return redirect(url_for("admin_login"))
 
