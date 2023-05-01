@@ -179,13 +179,11 @@ def verander_fase():
 
 @app.route("/fase1/", methods=["GET", "POST"])
 def fase1():
-    if request.method == "POST" and request.form.get("confirm") == "JA2023":
-        if "admin_username" in session:
-            code.gen_all()
+    if request.method == "POST" and request.form.get("confirm") == "JA2023" and "admin_username" in session:
+        code.gen_all()
 
-    if request.method == "POST" and request.form.get("leerlingnummer") is not None:
-        if "admin_username" in session:
-            code.gen_single(request.form.get("leerlingnummer"))
+    if request.method == "POST" and request.form.get("leerlingnummer") is not None and "admin_username" in session:
+        code.gen_single(request.form.get("leerlingnummer"))
 
     if "admin_username" not in session:
         return redirect(url_for("admin_login"))
@@ -196,9 +194,8 @@ def fase1():
 
 @app.route("/fase2/", methods=["GET", "POST"])
 def fase2():
-    if request.method == "POST":
-        if "admin_username" in session:
-            remind()
+    if request.method == "POST" and "admin_username" in session:
+        remind()
 
     if "admin_username" not in session:
         return redirect(url_for("admin_login"))
