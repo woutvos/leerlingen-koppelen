@@ -24,9 +24,7 @@ class leerlingen:
     def get_naam(leerlingnummer):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        c.execute(
-            f"SELECT naam FROM leerlingen WHERE leerlingnummer = {leerlingnummer}"
-        )
+        c.execute("SELECT naam FROM leerlingen WHERE leerlingnummer = ?", (leerlingnummer,))
         naam = c.fetchone()[0]
         conn.close()
         return naam
@@ -34,17 +32,14 @@ class leerlingen:
     def set_mentor(naam, mentor):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        c.execute(
-            f'UPDATE leerlingen SET nieuwe_mentor = "{mentor}" WHERE naam = "{naam}"'
-        )
+        c.execute('UPDATE leerlingen SET nieuwe_mentor = ? WHERE naam = ?', (mentor, naam))
         conn.commit()
         conn.close()
 
     def get_mentor(naam):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        c.execute(
-            f'SELECT huidige_mentor FROM leerlingen WHERE naam = "{naam}"')
+        c.execute('SELECT huidige_mentor FROM leerlingen WHERE naam = ?', (naam,))
         mentor = c.fetchone()[0]
         conn.close()
         return mentor
@@ -52,9 +47,7 @@ class leerlingen:
     def set_voorkeur(leerlingnummer, voorkeur_1, voorkeur_2, voorkeur_3):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        c.execute(
-            f'UPDATE leerlingen SET voorkeur_1 = "{voorkeur_1}", voorkeur_2 = "{voorkeur_2}", voorkeur_3 = "{voorkeur_3}" WHERE leerlingnummer = {leerlingnummer}'
-        )
+        c.execute('UPDATE leerlingen SET voorkeur_1 = ?, voorkeur_2 = ?, voorkeur_3 = ? WHERE leerlingnummer = ?', (voorkeur_1, voorkeur_2, voorkeur_3, leerlingnummer))
         conn.commit()
         conn.close()
         logging.info(
@@ -106,7 +99,7 @@ class mentoren:
     def get_name(mentor):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        c.execute(f"SELECT naam FROM mentoren WHERE id = {mentor}")
+        c.execute('SELECT naam FROM mentoren WHERE id = ?', (mentor,))
         naam = c.fetchone()[0]
         conn.close()
         return naam
@@ -154,9 +147,7 @@ class mentoren:
     def get_allowed_students(mentor):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        c.execute(
-            f"SELECT leerlingnummer, naam FROM leerlingen WHERE voorkeur_1 = '{mentor}' OR voorkeur_2 = '{mentor}' OR voorkeur_3 = '{mentor}'"
-        )
+        c.execute("SELECT leerlingnummer, naam FROM leerlingen WHERE voorkeur_1 = ? OR voorkeur_2 = ? OR voorkeur_3 = ?", (mentor, mentor, mentor))
         allowed_students = [(row[0], row[1]) for row in c.fetchall()]
         conn.close()
         return allowed_students

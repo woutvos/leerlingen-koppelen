@@ -30,9 +30,7 @@ class code:
             mail_leerling.voorkeur(leerlingnummer, code)
             code = hashlib.sha256(code.encode("utf-8")).hexdigest()
 
-            c.execute(
-                f'UPDATE leerlingen SET code = "{code}" WHERE leerlingnummer = {leerlingnummer}'
-            )
+            c.execute('UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?', (code, leerlingnummer))
             conn.commit()
 
         conn.close()
@@ -50,9 +48,7 @@ class code:
         mail_leerling.voorkeur(leerlingnummer, code)
         code = hashlib.sha256(code.encode("utf-8")).hexdigest()
 
-        c.execute(
-            f'UPDATE leerlingenSET code = "{code}" WHERE leerlingnummer = {leerlingnummer}'
-        )
+        c.execute('UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?', (code, leerlingnummer))
         conn.commit()
 
         conn.close()
@@ -67,9 +63,7 @@ class code:
 
         code = hashlib.sha256(code.encode("utf-8")).hexdigest()
 
-        c.execute(
-            f'SELECT * FROM leerlingen WHERE leerlingnummer = {leerling} AND code = "{code}"'
-        )
+        c.execute('SELECT * FROM leerlingen WHERE leerlingnummer = ? AND code = ?', (leerling, code))
         rows = c.fetchall()
 
         if len(rows) == 0:
@@ -82,9 +76,7 @@ class code:
 
         code = hashlib.sha256(code.encode("utf-8")).hexdigest()
 
-        c.execute(
-            f'SELECT * FROM mentoren WHERE id = {mentor} AND code = "{code}"'
-        )
+        c.execute('SELECT * FROM mentoren WHERE id = ? AND code = ?', (mentor, code))
         rows = c.fetchall()
 
         if len(rows) == 0:

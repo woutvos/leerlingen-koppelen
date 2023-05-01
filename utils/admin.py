@@ -11,9 +11,8 @@ class admin:
 
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
 
-        c.execute(
-            f'SELECT * FROM admin WHERE username = "{username}" AND password = "{password}"'
-        )
+        c.execute('SELECT * FROM admin WHERE username = ? AND password = ?', (username, password))
+        
         rows = c.fetchall()
 
         if len(rows) == 0:

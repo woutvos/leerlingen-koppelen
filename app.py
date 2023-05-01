@@ -12,7 +12,7 @@ from utils.other import remind
 app = Flask(__name__, template_folder="templates")
 Mobility(app)
 app.secret_key = "wk92ua3yfih8ts44v"
-huidige_fase = 3
+huidige_fase = 2
 conn = sqlite3.connect("database.db")
 c = conn.cursor()
 
