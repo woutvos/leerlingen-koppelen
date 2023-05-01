@@ -3,7 +3,7 @@ import sqlite3
 
 
 class leerlingen:
-    """ This class contains all things that have to do with the students. """
+    """This class contains all things that have to do with the students."""
 
     def get_voorkeuren():
         conn = sqlite3.connect("database.db")
@@ -70,7 +70,7 @@ class leerlingen:
 
 
 class mentoren:
-    """ This class contains all things that have to do with the mentors. """
+    """This class contains all things that have to do with the mentors."""
 
     def get_voorkeuren():
         conn = sqlite3.connect("database.db")

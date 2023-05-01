@@ -8,7 +8,7 @@ from utils.mail import mail_leerling
 
 
 class code:
-    """ This class contains all things that have to do with the codes from checking to generating. """
+    """This class contains all things that have to do with the codes from checking to generating."""
 
     def gen_all():
         conn = sqlite3.connect("database.db")
@@ -18,8 +18,7 @@ class code:
         rows = c.fetchall()
 
         logging.info(
-            "Gestart met het genereren van codes voor alle leerlingen"
-        )
+            "Gestart met het genereren van codes voor alle leerlingen")
 
         for row in rows:
             leerlingnummer = row[0]
