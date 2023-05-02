@@ -1,4 +1,4 @@
-import hashlib
+from argon2 import PasswordHasher
 import logging
 import random
 import sqlite3
@@ -6,6 +6,7 @@ import string
 
 from utils.mail import mail_leerling
 
+ph = PasswordHasher()
 
 class code:
     """This class contains all things that have to do with the codes from checking to generating."""
@@ -26,8 +27,8 @@ class code:
             code = "".join(
                 random.choice(string.ascii_uppercase + string.digits)
                 for _ in range(6))
-            mail_leerling.voorkeur(leerlingnummer, code)
-            code = hashlib.sha256(code.encode("utf-8")).hexdigest()
+            # mail_leerling.voorkeur(leerlingnummer, code)
+            code = ph.hash(code)
 
             c.execute('UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?', (code, leerlingnummer))
             conn.commit()
@@ -45,7 +46,7 @@ class code:
             random.choice(string.ascii_uppercase + string.digits)
             for _ in range(6))
         mail_leerling.voorkeur(leerlingnummer, code)
-        code = hashlib.sha256(code.encode("utf-8")).hexdigest()
+        code = ph.hash(code)
 
         c.execute('UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?', (code, leerlingnummer))
         conn.commit()
@@ -60,24 +61,24 @@ class code:
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
-        code = hashlib.sha256(code.encode("utf-8")).hexdigest()
-
-        c.execute('SELECT * FROM leerlingen WHERE leerlingnummer = ? AND code = ?', (leerling, code))
+        c.execute('SELECT code FROM leerlingen WHERE leerlingnummer = ?', (leerling,))
         rows = c.fetchall()
 
-        if len(rows) == 0:
-            return False
-        return True
+        code = ph.verify(rows[0][0], code)
+
+        if code == True:
+            return True
+        return False
 
     def check_mentor(mentor, code):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
-        code = hashlib.sha256(code.encode("utf-8")).hexdigest()
-
-        c.execute('SELECT * FROM mentoren WHERE id = ? AND code = ?', (mentor, code))
+        c.execute('SELECT code FROM mentoren WHERE id = ?', (mentor,))
         rows = c.fetchall()
 
-        if len(rows) == 0:
-            return False
-        return True
+        code = ph.verify(rows[0][0], code)
+
+        if code == True:
+            return True
+        return False
