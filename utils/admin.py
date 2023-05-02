@@ -1,6 +1,6 @@
-from argon2 import PasswordHasher
 import sqlite3
 
+from argon2 import PasswordHasher
 
 ph = PasswordHasher()
 
@@ -12,9 +12,10 @@ class admin:
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
-        c.execute('SELECT password FROM admin WHERE username = ?', (username,))
+        c.execute("SELECT password FROM admin WHERE username = ?",
+                  (username, ))
         rows = c.fetchall()
-        
+
         password = ph.verify(rows[0][0], password)
 
         if password == True:
