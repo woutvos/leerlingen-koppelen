@@ -1,12 +1,14 @@
-from argon2 import PasswordHasher
 import logging
 import random
 import sqlite3
 import string
 
+from argon2 import PasswordHasher
+
 from utils.mail import mail_leerling
 
 ph = PasswordHasher()
+
 
 class code:
     """This class contains all things that have to do with the codes from checking to generating."""
@@ -30,7 +32,10 @@ class code:
             # mail_leerling.voorkeur(leerlingnummer, code)
             code = ph.hash(code)
 
-            c.execute('UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?', (code, leerlingnummer))
+            c.execute(
+                "UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?",
+                (code, leerlingnummer),
+            )
             conn.commit()
 
         conn.close()
@@ -48,7 +53,10 @@ class code:
         mail_leerling.voorkeur(leerlingnummer, code)
         code = ph.hash(code)
 
-        c.execute('UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?', (code, leerlingnummer))
+        c.execute(
+            "UPDATE leerlingen SET code = ? WHERE leerlingnummer = ?",
+            (code, leerlingnummer),
+        )
         conn.commit()
 
         conn.close()
@@ -61,7 +69,8 @@ class code:
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
-        c.execute('SELECT code FROM leerlingen WHERE leerlingnummer = ?', (leerling,))
+        c.execute("SELECT code FROM leerlingen WHERE leerlingnummer = ?",
+                  (leerling, ))
         rows = c.fetchall()
 
         code = ph.verify(rows[0][0], code)
@@ -74,7 +83,7 @@ class code:
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
-        c.execute('SELECT code FROM mentoren WHERE id = ?', (mentor,))
+        c.execute("SELECT code FROM mentoren WHERE id = ?", (mentor, ))
         rows = c.fetchall()
 
         code = ph.verify(rows[0][0], code)
