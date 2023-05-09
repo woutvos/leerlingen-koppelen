@@ -59,9 +59,7 @@ def login_post():
 @app.route("/login/", methods=["GET"])
 def login():
     if "gebruikersnaam" not in session:
-        return render_template("login.html",
-                               title="Login",
-                               huidige_fase=huidige_fase)
+        return render_template("login.html", title="Login", huidige_fase=huidige_fase)
 
     if "gebruikersnaam" in session:
         return redirect(url_for("voorkeur"))
@@ -97,8 +95,8 @@ def set_voorkeur_leerling(device):
         voorkeur_2 = data[1]["value"].replace("<p>", "").replace("</p>", "")
         voorkeur_3 = data[2]["value"].replace("<p>", "").replace("</p>", "")
 
-        leerlingen.set_voorkeur(gebruikersnaam, voorkeur_1, voorkeur_2,
-                                voorkeur_3)
+        leerlingen.set_voorkeur(
+            gebruikersnaam, voorkeur_1, voorkeur_2, voorkeur_3)
         return jsonify({"status": "success"})
 
     if "gebruikersnaam" in session and huidige_fase == 3 and device != "mobile":
@@ -110,8 +108,9 @@ def set_voorkeur_leerling(device):
         voorkeur_4 = data[3]["value"].replace("<p>", "").replace("</p>", "")
         voorkeur_5 = data[4]["value"].replace("<p>", "").replace("</p>", "")
 
-        mentoren.set_voorkeur(gebruikersnaam, voorkeur_1, voorkeur_2,
-                              voorkeur_3, voorkeur_4, voorkeur_5)
+        mentoren.set_voorkeur(
+            gebruikersnaam, voorkeur_1, voorkeur_2, voorkeur_3, voorkeur_4, voorkeur_5
+        )
         return jsonify({"status": "success"})
 
 
@@ -144,9 +143,9 @@ def dashboard():
         return redirect(url_for("admin_login"))
 
     if "admin_username" in session:
-        return render_template("dashboard.html",
-                               title="Dashboard",
-                               huidige_fase=huidige_fase)
+        return render_template(
+            "dashboard.html", title="Dashboard", huidige_fase=huidige_fase
+        )
 
 
 @app.route("/verander-fase/", methods=["POST"])
@@ -190,8 +189,7 @@ def fase1_post():
     if request.form.get("confirm") == "JA2023" and "admin_username" in session:
         code.gen_all()
 
-    if request.form.get(
-            "leerlingnummer") is not None and "admin_username" in session:
+    if request.form.get("leerlingnummer") is not None and "admin_username" in session:
         code.gen_single(request.form.get("leerlingnummer"))
 
 
