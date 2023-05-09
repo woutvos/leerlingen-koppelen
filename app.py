@@ -219,4 +219,5 @@ def fase2():
         return render_template("fase2.html", title="Fase 2")
 
 
-app.run(port=80, threaded=True)
+if __name__ == "__main__":
+    app.run(debug=False)
