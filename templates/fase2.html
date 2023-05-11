@@ -1,26 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-<header>
-    <h1>Fase 2</h1>
-</header>
-<main>
-    <ul>
-        <li>Leerlingen geven voorkeur op</li>
-    </ul>
-    <p>
-        In deze fase kunnen leerlingen hun mentoren rangschikken en hiermee hun voorkeur aangeven. 
-        De leerling kan een voorkeur opgeven door de code in te voeren die hij heeft gekregen in fase 1.
-    </p>
-    <hr>
+<body>
+    <header>
+        <h1>Fase 2</h1>
+    </header>
+    <main>
+        <ul>
+            <li>Leerlingen geven voorkeur op</li>
+        </ul>
+        <p>
+            In deze fase kunnen leerlingen hun mentoren rangschikken en hiermee hun voorkeur aangeven. 
+            De leerling kan een voorkeur opgeven door de code in te voeren die hij heeft gekregen in fase 1.
+        </p>
+        <hr>
 
-    <h2>Controleren</h2>
-    <p>
-        Om te zorgen dat elke leerling zijn keuze heeft doorgegeven kun je dat hier controleren
-        en vervolgens de leerlingen die nog geen keuze hebben gemaakt een herinnering sturen.
-    </p>
+        <h2>Controleren</h2>
+        <p>
+            Om te zorgen dat elke leerling zijn keuze heeft doorgegeven kun je dat hier controleren
+            en vervolgens de leerlingen die nog geen keuze hebben gemaakt een herinnering sturen.
+        </p>
 
-    <form method="POST">
-        <button type="submit" class="submit">Leerlingen herinneren</button>
-    </form>
-</main>
+        <form method="POST">
+            <button type="submit" class="submit">Leerlingen herinneren</button>
+        </form>
+    </main>
+</body>
 {% endblock content %}

@@ -1,33 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
-<header>
-    <h1>Dashboard</h1>
-</header>
-<main>
-    <!-- Grid met daarin kaarten voor elke fase en 2 korte punten wat het doet -->
-    <div class="fase-grid">
-        <div class="fase-grid-item">
-            <h3>Verander fase</h3>
-            <p>De huidige fase is: {{ huidige_fase }}</p>
-            <a href="{{ url_for('verander_fase') }}"><button class="fase-button">Lees meer</button></a>
-        </div>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+    <main>
+        <!-- Grid met daarin kaarten voor elke fase en 2 korte punten wat het doet -->
+        <div class="fase-grid">
+            <div class="fase-grid-item">
+                <h3>Verander fase</h3>
+                <p>De huidige fase is: {{ huidige_fase }}</p>
+                <a href="{{ url_for('verander_fase') }}"><button class="fase-button">Lees meer</button></a>
+            </div>
 
-        <div class="fase-grid-item">
-            <h3>Fase 1</h3>
-            <ul>
-                <li>Data inlezen</li>
-                <li>Code sturen</li>
-            </ul>
-            <a href="{{ url_for('fase1') }}"><button class="fase-button">Lees meer</button></a>
-        </div>
+            <div class="fase-grid-item">
+                <h3>Fase 1</h3>
+                <ul>
+                    <li>Data inlezen</li>
+                    <li>Code sturen</li>
+                </ul>
+                <a href="{{ url_for('fase1') }}"><button class="fase-button">Lees meer</button></a>
+            </div>
 
-        <div class="fase-grid-item">
-            <h3>Fase 2</h3>
-            <ul>
-                <li>Leerlingen geven voorkeur op</li>
-            </ul>
-            <a href="{{ url_for('fase2') }}"><button class="fase-button">Lees meer</button></a>
+            <div class="fase-grid-item">
+                <h3>Fase 2</h3>
+                <ul>
+                    <li>Leerlingen geven voorkeur op</li>
+                </ul>
+                <a href="{{ url_for('fase2') }}"><button class="fase-button">Lees meer</button></a>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
+</body>
 {% endblock content %}

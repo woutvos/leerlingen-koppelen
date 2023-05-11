@@ -1,27 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
-<header>
-    <h1>Login</h1>
-</header>
-
-<main>
-    <p>Je bent op de login pagina van de website om je voorkeuren voor het volgende schooljaar in te vullen. Om toegang te krijgen tot de website moet je eerst inloggen. Vul hieronder je leerlingnummer en persoonlijke code die je via je schoolmail hebt gekeregen in.</p>
-    {% if huidige_fase == 2 %}
-        <p>Momenteel zijn de leerlingen aan de beurt voor het invullen van hun voorkeur, geen leerling? Wacht tot je een mail krijgt dat je je voorkeur in kan vullen.</p>
-    {% elif huidige_fase == 3 %}
-        <p>Momenteel zijn de mentoren aan de beurt voor het invullen van hun voorkeur, geen mentor? Helaas is het invullen voor leerlingen al geweest en ben je te laat.</p>
-    {% endif %}
-
-    <div>
-        <form method="POST">
-            {% if huidige_fase == 2 %}
-                <input class="login" type="username" id="gebruikersnaam" name="gebruikersnaam" placeholder="Leerlingnummer" required autocomplete="off"/><br>
-            {% elif huidige_fase == 3 %}
-                <input class="login" type="username" id="gebruikersnaam" name="gebruikersnaam" placeholder="Mentor id" required autocomplete="off"/><br>
-            {% endif %}
-            <input class="login" type="password" id="code" name="code" placeholder="Persoonlijke code" required/><br>
-            <button type="submit" class="submit">Voorkeuren invullen</button>
-        </form>
-    </div>
-</main>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+    
+    <main>
+        <p>Je bent op de login pagina van de website om je voorkeuren voor het volgende schooljaar in te vullen. Om toegang te krijgen tot de website moet je eerst inloggen. Vul hieronder je leerlingnummer en persoonlijke code die je via je schoolmail hebt gekeregen in.</p>
+        {% if huidige_fase == 2 %}
+            <p>Momenteel zijn de leerlingen aan de beurt voor het invullen van hun voorkeur, geen leerling? Wacht tot je een mail krijgt dat je je voorkeur in kan vullen.</p>
+        {% elif huidige_fase == 3 %}
+            <p>Momenteel zijn de mentoren aan de beurt voor het invullen van hun voorkeur, geen mentor? Helaas is het invullen voor leerlingen al geweest en ben je te laat.</p>
+        {% endif %}
+    
+        <div>
+            <form method="POST">
+                {% if huidige_fase == 2 %}
+                    <input class="login" type="username" id="gebruikersnaam" name="gebruikersnaam" placeholder="Leerlingnummer" required autocomplete="off"/><br>
+                {% elif huidige_fase == 3 %}
+                    <input class="login" type="username" id="gebruikersnaam" name="gebruikersnaam" placeholder="Mentor id" required autocomplete="off"/><br>
+                {% endif %}
+                <input class="login" type="password" id="code" name="code" placeholder="Persoonlijke code" required/><br>
+                <button type="submit" class="submit">Voorkeuren invullen</button>
+            </form>
+        </div>
+    </main>
+</body>
 {% endblock content %}

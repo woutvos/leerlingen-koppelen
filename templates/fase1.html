@@ -1,62 +1,64 @@
 {% extends "layout.html" %}
 {% block content %}
-<header>
-    <h1>Fase 1</h1>
-</header>
-<main>
-    <ul>
-        <li>Data inlezen</li>
-        <li>Code sturen</li>
-    </ul>
-    <p>
-        We lezen alle data in in een database, waar we vervolgens verder mee kunnen werken.
-        Vervolgens wordt voor elke leerling een unieke code gegenereerd waarvan de hash wordt opgeslagen in de database, 
-        tegelijkertijd wordt de code naar de leerling gestuurd zodat deze nergens hoeft worden opgeslagen. 
-        Indien nodig kan de code altijd her gegeneerd worden.
-    </p>
-    <hr>
+<body>
+    <header>
+        <h1>Fase 1</h1>
+    </header>
+    <main>
+        <ul>
+            <li>Data inlezen</li>
+            <li>Code sturen</li>
+        </ul>
+        <p>
+            We lezen alle data in in een database, waar we vervolgens verder mee kunnen werken.
+            Vervolgens wordt voor elke leerling een unieke code gegenereerd waarvan de hash wordt opgeslagen in de database, 
+            tegelijkertijd wordt de code naar de leerling gestuurd zodat deze nergens hoeft worden opgeslagen. 
+            Indien nodig kan de code altijd her gegeneerd worden.
+        </p>
+        <hr>
 
-    <h2>Database</h2>
-    <p>
-        De database is een MySQL database, deze wordt gehost op de server van de school. 
-        De database is beveiligd met een wachtwoord en is alleen toegankelijk voor de ontwikkelaar.
-    </p>
-    <form method="POST">
-        <input class="input" type="hidden" id="database" name="database"/><br>
-        <button type="submit" class="submit">Database aanmaken</button>
-    </form>
-    <hr>
+        <h2>Database</h2>
+        <p>
+            De database is een MySQL database, deze wordt gehost op de server van de school. 
+            De database is beveiligd met een wachtwoord en is alleen toegankelijk voor de ontwikkelaar.
+        </p>
+        <form method="POST">
+            <input class="input" type="hidden" id="database" name="database"/><br>
+            <button type="submit" class="submit">Database aanmaken</button>
+        </form>
+        <hr>
 
-    <h2>Inlezen</h2>
-    <p>Het inlezen van de data moet handmatig worden gedaan, de ontwikkelaar zal hier bij helpen.</p>
-    <hr>
+        <h2>Inlezen</h2>
+        <p>Het inlezen van de data moet handmatig worden gedaan, de ontwikkelaar zal hier bij helpen.</p>
+        <hr>
 
-    <h2>Code's genereren</h2>
-    <p>
-        De code wordt gegenereerd door een algoritme. 
-        De code wordt gegenereerd door een random string van 6 karakters te genereren, deze wordt gelijk naar de leerling gemaild. 
-        Hierna wordt deze string vervolgens ge-hashd met een SHA256 algoritme en opgeslagen in de database.
-        Door deze methode is het niet mogelijk om de code te achterhalen.
-    </p>
-    <form method="POST">
-        <label for="confirm">
-            Voer hieronder "JA2023" in.
-            <strong>Let op!</strong> Deze actie kan niet ongedaan worden gemaakt!
-        </label>
-        <br>
-        <input class="input" type="text" id="confirm" name="confirm" placeholder="Weet je het zeker?" required/><br>
-        <button type="submit" class="submit">Code's genereren en versturen</button>
-    </form>
-    <hr>
+        <h2>Code's genereren</h2>
+        <p>
+            De code wordt gegenereerd door een algoritme. 
+            De code wordt gegenereerd door een random string van 6 karakters te genereren, deze wordt gelijk naar de leerling gemaild. 
+            Hierna wordt deze string vervolgens ge-hashd met een SHA256 algoritme en opgeslagen in de database.
+            Door deze methode is het niet mogelijk om de code te achterhalen.
+        </p>
+        <form method="POST">
+            <label for="confirm">
+                Voer hieronder "JA2023" in.
+                <strong>Let op!</strong> Deze actie kan niet ongedaan worden gemaakt!
+            </label>
+            <br>
+            <input class="input" type="text" id="confirm" name="confirm" placeholder="Weet je het zeker?" required/><br>
+            <button type="submit" class="submit">Code's genereren en versturen</button>
+        </form>
+        <hr>
 
-    <h2>Code hergeneren</h2>
-    <p>
-        Indien nodig kan de code altijd her gegenereerd worden. 
-        Dit kan handig zijn als de code per ongeluk is verwijderd of als de code niet is aangekomen.
-    </p>
-    <form method="POST">
-        <input class="input" type="text" id="leerlingnummer" name="leerlingnummer" placeholder="Leerlingnummer" required/><br>
-        <button type="submit" class="submit">Code hergenereren en versturen</button>
-    </form>
-</main>
+        <h2>Code hergeneren</h2>
+        <p>
+            Indien nodig kan de code altijd her gegenereerd worden. 
+            Dit kan handig zijn als de code per ongeluk is verwijderd of als de code niet is aangekomen.
+        </p>
+        <form method="POST">
+            <input class="input" type="text" id="leerlingnummer" name="leerlingnummer" placeholder="Leerlingnummer" required/><br>
+            <button type="submit" class="submit">Code hergenereren en versturen</button>
+        </form>
+    </main>
+</body>
 {% endblock content %}

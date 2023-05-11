@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-<header>
-    <h1>Verander de fase</h1>
-</header>
-<main>
-    <h2>Verander de huidige fase</h2>
-    <p>De huidige fase is: {{ huidige_fase }}</p>
-    <form method="POST">
-        <input class="slider" type="range" id="fase" name="fase" min="1" max="5" value="{{ huidige_fase }}">
-        <button type="submit" class="submit">Verander fase</button>
-    </form>
-</main>
+<body>
+    <header>
+        <h1>Verander de fase</h1>
+    </header>
+    <main>
+        <h2>Verander de huidige fase</h2>
+        <p>De huidige fase is: {{ huidige_fase }}</p>
+        <form method="POST">
+            <input class="slider" type="range" id="fase" name="fase" min="1" max="5" value="{{ huidige_fase }}">
+            <button type="submit" class="submit">Verander fase</button>
+        </form>
+    </main>
+</body>
 {% endblock content %}

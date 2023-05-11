@@ -1,16 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
-<header>
-    <h1>Admin login</h1>
-</header>
-
-<main>
-    <div>
-        <form method="POST">
-            <input class="login" type="username" id="username" name="username" placeholder="Gebruikersnaam" required autocomplete="off"/><br>
-            <input class="login" type="password" id="password" name="password" placeholder="Wachtwoord" required/><br>
-            <button type="submit" class="submit">Log in</button>
-        </form>
-    </div>
-</main>
+<body>
+    <header>
+        <h1>Admin login</h1>
+    </header>
+    
+    <main>
+        <div>
+            <form method="POST">
+                <input class="login" type="username" id="username" name="username" placeholder="Gebruikersnaam" required autocomplete="off"/><br>
+                <input class="login" type="password" id="password" name="password" placeholder="Wachtwoord" required/><br>
+                <button type="submit" class="submit">Log in</button>
+            </form>
+        </div>
+    </main>
+</body>
 {% endblock content %}
