@@ -153,25 +153,9 @@ def verander_fase_post():
     global huidige_fase
     if "admin_username" in session:
         fase = request.form.get("fase")
-        if fase == "1":
-            huidige_fase = 1
-            logging.info("Fase 1 is gestart")
-
-        if fase == "2":
-            huidige_fase = 2
-            logging.info("Fase 2 is gestart")
-
-        if fase == "3":
-            huidige_fase = 3
-            logging.info("Fase 3 is gestart")
-
-        if fase == "4":
-            huidige_fase = 4
-            logging.info("Fase 4 is gestart")
-
-        if fase == "5":
-            huidige_fase = 5
-            logging.info("Fase 5 is gestart")
+        huidige_fase = int(fase)
+        logging.info(f"Fase {fase} is gestart")
+        return redirect(url_for("dashboard"))
 
 
 @app.route("/verander-fase/", methods=["GET"])
@@ -188,9 +172,11 @@ def verander_fase():
 def fase1_post():
     if request.form.get("confirm") == "JA2023" and "admin_username" in session:
         code.gen_all()
+        return redirect(url_for("dashboard"))
 
     if request.form.get("leerlingnummer") is not None and "admin_username" in session:
         code.gen_single(request.form.get("leerlingnummer"))
+        return redirect(url_for("dashboard"))
 
 
 @app.route("/fase1/", methods=["GET"])
@@ -206,6 +192,7 @@ def fase1():
 def fase2_post():
     if "admin_username" in session:
         remind()
+        return redirect(url_for("dashboard"))
 
 
 @app.route("/fase2/", methods=["GET"])
