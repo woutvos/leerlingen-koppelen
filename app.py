@@ -1,7 +1,16 @@
 import logging
 import sqlite3
 
-from flask import Flask, jsonify, redirect, render_template, request, session, url_for, flash
+from flask import (
+    Flask,
+    flash,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
 from flask_mobility import Mobility
 
 from utils.admin import admin
