@@ -42,7 +42,6 @@ def login_post():
             logging.info(f"Leerling {gebruikersnaam} heeft ingelogd")
             return redirect(url_for("voorkeur"))
         logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
-        flash('Ongeldige inloggegevens')
 
     elif huidige_fase == 3:
         if code.check_mentor(gebruikersnaam, password_code) is True:
@@ -50,12 +49,10 @@ def login_post():
             logging.info(f"Mentor {gebruikersnaam} heeft ingelogd")
             return redirect(url_for("voorkeur"))
         logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
-        flash('Ongeldige inloggegevens')
 
 
 @app.route("/login/", methods=["GET"])
 def login():
-    error = None
     if "gebruikersnaam" not in session:
         return render_template("login.html", title="Login", huidige_fase=huidige_fase)
 
