@@ -79,7 +79,6 @@ class mail_leerling:
 
         email_message = MIMEMultipart()
         email_message["From"] = os.getenv("EMAIL")
-        # email_message['To'] = "mail@woutvos.nl" # tijdelijk om te zorgen dat mails niet echt naar leerilngen gaan
         email_message["Subject"] = "Geef je voorkeur op!"
         email_message["To"] = f"{leerlingnummer}@corderius.nl"
 
@@ -89,8 +88,7 @@ class mail_leerling:
         server = smtplib.SMTP(f"{host}: {port}")
         server.starttls()
         server.login(os.getenv("EMAIL"), os.getenv("EMAIL_WACHTWOORD"))
-        server.sendmail(email_message["From"], email_message["To"],
-                        email_string)
+        server.sendmail(email_message["From"], email_message["To"], email_string)
         server.quit()
 
         print(
@@ -155,7 +153,6 @@ class mail_leerling:
 
         email_message = MIMEMultipart()
         email_message["From"] = os.getenv("EMAIL")
-        # email_message['To'] = "mail@woutvos.nl" # tijdelijk om te zorgen dat mails niet echt naar leerilngen gaan
         email_message["Subject"] = "Je mentor is bekend!"
         email_message["To"] = f"{leerlingnummer}@corderius.nl"
 
@@ -230,7 +227,6 @@ class mail_leerling:
 
         email_message = MIMEMultipart()
         email_message["From"] = os.getenv("EMAIL")
-        # email_message['To'] = "mail@woutvos.nl" # tijdelijk om te zorgen dat mails niet echt naar leerilngen gaan
         email_message["Subject"] = "Reminder: vul je voorkeur in"
         email_message["To"] = f"{leerlingnummer}@corderius.nl"
 

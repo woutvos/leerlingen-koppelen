@@ -29,7 +29,7 @@ class code:
             code = "".join(
                 random.choice(string.ascii_uppercase + string.digits)
                 for _ in range(6))
-            # mail_leerling.voorkeur(leerlingnummer, code)
+            mail_leerling.voorkeur(leerlingnummer, code)
             code = ph.hash(code)
 
             c.execute(
