@@ -1,7 +1,16 @@
 import logging
 import sqlite3
 
-from flask import Flask, jsonify, redirect, render_template, request, session, url_for, flash
+from flask import (
+    Flask,
+    flash,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
 from flask_mobility import Mobility
 
 from utils.admin import admin
@@ -42,7 +51,7 @@ def login_post():
             logging.info(f"Leerling {gebruikersnaam} heeft ingelogd")
             return redirect(url_for("voorkeur"))
         logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
-        flash('Ongeldige inloggegevens')
+        flash("Ongeldige inloggegevens")
 
     elif huidige_fase == 3:
         if code.check_mentor(gebruikersnaam, password_code) is True:
@@ -50,7 +59,7 @@ def login_post():
             logging.info(f"Mentor {gebruikersnaam} heeft ingelogd")
             return redirect(url_for("voorkeur"))
         logging.info(f"Code verkeerd ingevoerd voor {gebruikersnaam}")
-        flash('Ongeldige inloggegevens')
+        flash("Ongeldige inloggegevens")
 
 
 @app.route("/login/", methods=["GET"])
