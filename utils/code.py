@@ -27,8 +27,8 @@ class code:
             leerlingnummer = row[0]
 
             code = "".join(
-                random.choice(string.ascii_uppercase + string.digits)
-                for _ in range(6))
+                random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
+            )
             mail_leerling.voorkeur(leerlingnummer, code)
             code = ph.hash(code)
 
@@ -48,8 +48,8 @@ class code:
         c = conn.cursor()
 
         code = "".join(
-            random.choice(string.ascii_uppercase + string.digits)
-            for _ in range(6))
+            random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
+        )
         mail_leerling.voorkeur(leerlingnummer, code)
         code = ph.hash(code)
 
@@ -69,8 +69,8 @@ class code:
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
-        c.execute("SELECT code FROM leerlingen WHERE leerlingnummer = ?",
-                  (leerling, ))
+        c.execute(
+            "SELECT code FROM leerlingen WHERE leerlingnummer = ?", (leerling,))
         rows = c.fetchall()
 
         code = ph.verify(rows[0][0], code)
@@ -83,7 +83,7 @@ class code:
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
-        c.execute("SELECT code FROM mentoren WHERE id = ?", (mentor, ))
+        c.execute("SELECT code FROM mentoren WHERE id = ?", (mentor,))
         rows = c.fetchall()
 
         code = ph.verify(rows[0][0], code)

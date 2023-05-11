@@ -88,12 +88,12 @@ class mail_leerling:
         server = smtplib.SMTP(f"{host}: {port}")
         server.starttls()
         server.login(os.getenv("EMAIL"), os.getenv("EMAIL_WACHTWOORD"))
-        server.sendmail(email_message["From"], email_message["To"], email_string)
+        server.sendmail(email_message["From"],
+                        email_message["To"], email_string)
         server.quit()
 
         print(
-            f"Mail verzonden naar {leerlingnummer}@corderius.nl met code: {code}"
-        )
+            f"Mail verzonden naar {leerlingnummer}@corderius.nl met code: {code}")
 
     def uitslag(leerlingnummer, mentor, klas):
         load_dotenv()
@@ -162,8 +162,8 @@ class mail_leerling:
         server = smtplib.SMTP(f"{host}: {port}")
         server.starttls()
         server.login(os.getenv("EMAIL"), os.getenv("EMAIL_WACHTWOORD"))
-        server.sendmail(email_message["From"], email_message["To"],
-                        email_string)
+        server.sendmail(email_message["From"],
+                        email_message["To"], email_string)
         server.quit()
 
         print(f"Uitslag verzonden naar {leerlingnummer}@corderius.nl")
@@ -236,8 +236,8 @@ class mail_leerling:
         server = smtplib.SMTP(f"{host}: {port}")
         server.starttls()
         server.login(os.getenv("EMAIL"), os.getenv("EMAIL_WACHTWOORD"))
-        server.sendmail(email_message["From"], email_message["To"],
-                        email_string)
+        server.sendmail(email_message["From"],
+                        email_message["To"], email_string)
         server.quit()
 
         print(f"Reminder send to {leerlingnummer}@corderius.nl")
