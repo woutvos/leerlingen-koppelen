@@ -29,6 +29,7 @@ main {
     text-align: center;
     display: block;
     padding: 20px;
+    min-height: 100vh
 }
 
 .background {
