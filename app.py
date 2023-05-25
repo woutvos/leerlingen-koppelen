@@ -148,6 +148,7 @@ def verander_fase_post():
     global huidige_fase
     if "admin_username" in session:
         fase = request.form.get("fase")
+        session.clear()
         huidige_fase = int(fase)
         logging.info(f"Fase {fase} is gestart")
         return redirect(url_for("dashboard"))
