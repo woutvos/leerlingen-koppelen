@@ -40,7 +40,8 @@ class code:
 
         conn.close()
 
-        logging.info("Alle codes zijn gegenereerd en verstuurd naar de leerlingen")
+        logging.info(
+            "Alle codes zijn gegenereerd en verstuurd naar de leerlingen")
 
     def gen_leerling(leerlingnummer):
         conn = sqlite3.connect("database.db")
@@ -98,8 +99,7 @@ class code:
         c.execute("SELECT * FROM mentoren")
         rows = c.fetchall()
 
-        logging.info(
-            "Gestart met het genereren van codes voor alle mentoren")
+        logging.info("Gestart met het genereren van codes voor alle mentoren")
 
         for row in rows:
             id = row[0]
@@ -118,7 +118,8 @@ class code:
 
         conn.close()
 
-        logging.info("Alle codes zijn gegenereerd en verstuurd naar de mentoren")
+        logging.info(
+            "Alle codes zijn gegenereerd en verstuurd naar de mentoren")
 
     def gen_mentor(id):
         conn = sqlite3.connect("database.db")
@@ -138,6 +139,4 @@ class code:
 
         conn.close()
 
-        logging.info(
-            f"Code is hergegenereerd en verstuurd naar mentor {id}"
-        )
+        logging.info(f"Code is hergegenereerd en verstuurd naar mentor {id}")
