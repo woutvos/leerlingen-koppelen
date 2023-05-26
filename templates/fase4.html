@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<body>
+    <header>
+        <h1>Fase 4</h1>
+    </header>
+    <main>
+        <ul>
+            <li>Mentoren geven voorkeur op</li>
+        </ul>
+        <p>
+            In deze fase kunnen mentoren leerlingen rangschikken en hiermee hun voorkeur aangeven. 
+            De mentor kan een voorkeur opgeven door de code in te voeren die hij heeft gekregen in fase 1.
+        </p>
+        <hr>
+
+        <h2>Controleren</h2>
+        <p>
+            Om te zorgen dat elke mentor zijn keuze heeft doorgegeven kun je dat hier controleren
+            en vervolgens de mentoren die nog geen keuze hebben gemaakt een herinnering sturen.
+        </p>
+
+        <form method="POST">
+            <button type="submit" class="submit">mentoren herinneren</button>
+        </form>
+    </main>
+</body>
+{% endblock content %}

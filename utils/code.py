@@ -5,7 +5,7 @@ import string
 
 from argon2 import PasswordHasher
 
-from utils.mail import mail_leerling
+from utils.mail import mail_leerling, mail_mentor
 
 ph = PasswordHasher()
 
@@ -13,7 +13,7 @@ ph = PasswordHasher()
 class code:
     """This class contains all things that have to do with the codes from checking to generating."""
 
-    def gen_all():
+    def gen_leerlingen():
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
@@ -40,10 +40,9 @@ class code:
 
         conn.close()
 
-        logging.info(
-            "Alle codes zijn gegenereerd en verstuurd naar de leerlingen")
+        logging.info("Alle codes zijn gegenereerd en verstuurd naar de leerlingen")
 
-    def gen_single(leerlingnummer):
+    def gen_leerling(leerlingnummer):
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
 
@@ -91,3 +90,54 @@ class code:
         if code == True:
             return True
         return False
+
+    def gen_mentoren():
+        conn = sqlite3.connect("database.db")
+        c = conn.cursor()
+
+        c.execute("SELECT * FROM mentoren")
+        rows = c.fetchall()
+
+        logging.info(
+            "Gestart met het genereren van codes voor alle mentoren")
+
+        for row in rows:
+            id = row[0]
+
+            code = "".join(
+                random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
+            )
+            mail_mentor.voorkeur(id, code)
+            code = ph.hash(code)
+
+            c.execute(
+                "UPDATE mentoren SET code = ? WHERE id = ?",
+                (code, id),
+            )
+            conn.commit()
+
+        conn.close()
+
+        logging.info("Alle codes zijn gegenereerd en verstuurd naar de mentoren")
+
+    def gen_mentor(id):
+        conn = sqlite3.connect("database.db")
+        c = conn.cursor()
+
+        code = "".join(
+            random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
+        )
+        mail_leerling.voorkeur(id, code)
+        code = ph.hash(code)
+
+        c.execute(
+            "UPDATE mentoren SET code = ? WHERE id = ?",
+            (code, id),
+        )
+        conn.commit()
+
+        conn.close()
+
+        logging.info(
+            f"Code is hergegenereerd en verstuurd naar mentor {id}"
+        )

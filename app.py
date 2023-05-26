@@ -176,11 +176,11 @@ def verander_fase():
 @app.route("/fase1/", methods=["POST"])
 def fase1_post():
     if request.form.get("confirm") == "JA2023" and "admin_username" in session:
-        code.gen_all()
+        code.gen_leerlingen()
         return redirect(url_for("dashboard"))
 
     if request.form.get("leerlingnummer") is not None and "admin_username" in session:
-        code.gen_single(request.form.get("leerlingnummer"))
+        code.gen_leerling(request.form.get("leerlingnummer"))
         return redirect(url_for("dashboard"))
 
 
@@ -208,6 +208,41 @@ def fase2():
     if "admin_username" in session:
         return render_template("fase2.html", title="Fase 2")
 
+
+@app.route("/fase3/", methods=["POST"])
+def fase3_post():
+    if request.form.get("confirm") == "JA2023" and "admin_username" in session:
+        code.gen_mentoren()
+        return redirect(url_for("dashboard"))
+
+    if request.form.get("id") is not None and "admin_username" in session:
+        code.gen_leerling(request.form.get("id"))
+        return redirect(url_for("dashboard"))
+
+
+@app.route("/fase3/", methods=["GET"])
+def fase3():
+    if "admin_username" not in session:
+        return redirect(url_for("admin_login"))
+
+    if "admin_username" in session:
+        return render_template("fase3.html", title="Fase 3")
+
+
+@app.route("/fase4/", methods=["POST"])
+def fase4_post():
+    if "admin_username" in session:
+        #remind for mentoren()
+        return redirect(url_for("dashboard"))
+
+
+@app.route("/fase4/", methods=["GET"])
+def fase4():
+    if "admin_username" not in session:
+        return redirect(url_for("admin_login"))
+
+    if "admin_username" in session:
+        return render_template("fase4.html", title="Fase 4")
 
 if __name__ == "__main__":
     app.run(debug=False)
