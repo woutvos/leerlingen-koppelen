@@ -232,7 +232,7 @@ def fase3():
 @app.route("/fase4/", methods=["POST"])
 def fase4_post():
     if "admin_username" in session:
-        #remind for mentoren()
+        # remind for mentoren()
         return redirect(url_for("dashboard"))
 
 
@@ -243,6 +243,7 @@ def fase4():
 
     if "admin_username" in session:
         return render_template("fase4.html", title="Fase 4")
+
 
 if __name__ == "__main__":
     app.run(debug=False)

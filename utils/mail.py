@@ -327,5 +327,4 @@ class mail_mentor:
                         email_message["To"], email_string)
         server.quit()
 
-        print(
-            f"Mail verzonden naar {id}@corderius.nl met code: {code}")
+        print(f"Mail verzonden naar {id}@corderius.nl met code: {code}")
