@@ -1,6 +1,6 @@
 from matching.games import HospitalResident
 
-from utils.data import mentoren, leerlingen
+from utils.data import leerlingen, mentoren
 
 
 def match():
@@ -47,5 +47,6 @@ def match():
     # Controleer of de uitkomst valide is
     print(f"\nUitkomst valide: {game.check_validity()}")
     print(f"Uitkomst stabiel: {game.check_stability()}")
+
 
 match()
