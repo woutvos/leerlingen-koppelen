@@ -3,7 +3,6 @@ import sqlite3
 
 from flask import (
     Flask,
-    flash,
     jsonify,
     redirect,
     render_template,

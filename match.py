@@ -1,22 +1,23 @@
 from matching.games import HospitalResident
 
-from utils.data import leerlingen, mentoren
+from utils.data import mentoren, leerlingen
 
 
 def match():
     mentor_voorkeuren = mentoren.get_voorkeuren()
+    leerling_voorkeuren = leerlingen.get_voorkeuren()
 
     # Vul de lijst van de voorkeur voor een mentor aan,
     # dit doen we zodat de leerling het grootste voordeel heeft
     for mentor in mentor_voorkeuren:
-        for leerling in leerlingen.get_voorkeuren():
-            if (leerlingen.get_voorkeuren()[leerling][0] == mentor
+        for leerling in leerling_voorkeuren:
+            if (leerling_voorkeuren[leerling][0] == mentor
                     and leerling not in mentor_voorkeuren[mentor]):
                 mentor_voorkeuren[mentor].append(leerling)
-            if (leerlingen.get_voorkeuren()[leerling][1] == mentor
+            if (leerling_voorkeuren[leerling][1] == mentor
                     and leerling not in mentor_voorkeuren[mentor]):
                 mentor_voorkeuren[mentor].append(leerling)
-            if (leerlingen.get_voorkeuren()[leerling][2] == mentor
+            if (leerling_voorkeuren[leerling][2] == mentor
                     and leerling not in mentor_voorkeuren[mentor]):
                 mentor_voorkeuren[mentor].append(leerling)
 
@@ -40,9 +41,11 @@ def match():
 
     # Print de uitkomsten leesbaar
     print("De uitkomst is:\n")
-    for mentor, leerlingen in match_uitkomst.items():
-        print(f"{mentor}: {leerlingen}")
+    for mentor, leerling in match_uitkomst.items():
+        print(f"{mentor}: {leerling}")
 
     # Controleer of de uitkomst valide is
     print(f"\nUitkomst valide: {game.check_validity()}")
     print(f"Uitkomst stabiel: {game.check_stability()}")
+
+match()
