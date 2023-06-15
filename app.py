@@ -16,6 +16,7 @@ from utils.admin import admin
 from utils.code import code
 from utils.data import leerlingen, mentoren
 from utils.other import remind
+from utils.match import match
 
 app = Flask(__name__, template_folder="templates")
 Mobility(app)
@@ -242,6 +243,22 @@ def fase4():
 
     if "admin_username" in session:
         return render_template("fase4.html", title="Fase 4")
+
+
+@app.route("/match/", methods=["POST"])
+def match_post():
+    if "admin_username" in session:
+        match()
+        return redirect(url_for("match"))
+
+
+@app.route("/match/", methods=["GET"])
+def match():
+    if "admin_username" not in session:
+        return redirect(url_for("admin_login"))
+
+    if "admin_username" in session:
+        return render_template("match.html", title="Match")
 
 if __name__ == "__main__":
     app.run(debug=False)

@@ -47,5 +47,3 @@ def match():
     # Controleer of de uitkomst valide is
     print(f"\nUitkomst valide: {game.check_validity()}")
     print(f"Uitkomst stabiel: {game.check_stability()}")
-
-match()
