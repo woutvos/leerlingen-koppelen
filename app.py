@@ -1,15 +1,7 @@
 import logging
 import sqlite3
 
-from flask import (
-    Flask,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    session,
-    url_for,
-)
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_mobility import Mobility
 
 from utils.admin import admin
@@ -63,7 +55,9 @@ def login_post():
 @app.route("/login/", methods=["GET"])
 def login():
     if "gebruikersnaam" not in session:
-        return render_template("login.html", title="Login", huidige_fase=huidige_fase)
+        return render_template("login.html",
+                               title="Login",
+                               huidige_fase=huidige_fase)
 
     if "gebruikersnaam" in session:
         return redirect(url_for("voorkeur"))
@@ -99,8 +93,8 @@ def set_voorkeur_leerling(device):
         voorkeur_2 = data[1]["value"].replace("<p>", "").replace("</p>", "")
         voorkeur_3 = data[2]["value"].replace("<p>", "").replace("</p>", "")
 
-        leerlingen.set_voorkeur(
-            gebruikersnaam, voorkeur_1, voorkeur_2, voorkeur_3)
+        leerlingen.set_voorkeur(gebruikersnaam, voorkeur_1, voorkeur_2,
+                                voorkeur_3)
         return jsonify({"status": "success"})
 
     if "gebruikersnaam" in session and huidige_fase == 3 and device != "mobile":
@@ -112,9 +106,8 @@ def set_voorkeur_leerling(device):
         voorkeur_4 = data[3]["value"].replace("<p>", "").replace("</p>", "")
         voorkeur_5 = data[4]["value"].replace("<p>", "").replace("</p>", "")
 
-        mentoren.set_voorkeur(
-            gebruikersnaam, voorkeur_1, voorkeur_2, voorkeur_3, voorkeur_4, voorkeur_5
-        )
+        mentoren.set_voorkeur(gebruikersnaam, voorkeur_1, voorkeur_2,
+                              voorkeur_3, voorkeur_4, voorkeur_5)
         return jsonify({"status": "success"})
 
 
@@ -147,9 +140,9 @@ def dashboard():
         return redirect(url_for("admin_login"))
 
     if "admin_username" in session:
-        return render_template(
-            "dashboard.html", title="Dashboard", huidige_fase=huidige_fase
-        )
+        return render_template("dashboard.html",
+                               title="Dashboard",
+                               huidige_fase=huidige_fase)
 
 
 @app.route("/verander-fase/", methods=["POST"])
@@ -179,7 +172,8 @@ def fase1_post():
         code.gen_leerlingen()
         return redirect(url_for("dashboard"))
 
-    if request.form.get("leerlingnummer") is not None and "admin_username" in session:
+    if request.form.get(
+            "leerlingnummer") is not None and "admin_username" in session:
         code.gen_leerling(request.form.get("leerlingnummer"))
         return redirect(url_for("dashboard"))
 
@@ -232,7 +226,7 @@ def fase3():
 @app.route("/fase4/", methods=["POST"])
 def fase4_post():
     if "admin_username" in session:
-        #remind for mentoren()
+        # remind for mentoren()
         return redirect(url_for("dashboard"))
 
 
@@ -243,22 +237,6 @@ def fase4():
 
     if "admin_username" in session:
         return render_template("fase4.html", title="Fase 4")
-
-
-@app.route("/match/", methods=["POST"])
-def match_post():
-    if "admin_username" in session:
-        match()
-        return redirect(url_for("match"))
-
-
-@app.route("/match/", methods=["GET"])
-def match():
-    if "admin_username" not in session:
-        return redirect(url_for("admin_login"))
-
-    if "admin_username" in session:
-        return render_template("match.html", title="Match")
 
 if __name__ == "__main__":
     app.run(debug=False)
